@@ -8,35 +8,37 @@ interface CardProps {
   numero: string;
 }
 
+function getRandomElement(arr:any) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+}
+
 const Card: React.FC<CardProps> = ({ titulo,numero }) => {
 
   const [tecnologias,setTecnologias] = useState<any>([]);
 
   useEffect(() => {   
     return () => {
-        // Faz uma requisição a um usuarío com um ID expecifico
         axios.get(`http://localhost:9999/tecnologias/${numero}`)
         .then(function (response) {
-          // manipula o sucesso da requisição
-          setTecnologias(response.data);
+          setTecnologias([getRandomElement(response.data)]);
+          
+          // setKeyAleatoria(Math.floor(Math.random() * tecnologias.length));
         })
         .catch(function (error) {
-          // manipula erros da requisição
           console.error(error);
         })
         .finally(function () {
-          // sempre será executado
+
         });
     };
   }, []);
-
-
 
   return (
     <div className='col-2 text-center'>
       <h3>{titulo}</h3>
       <div className="card-tecnologia col-12 rounded-3 border border-dark">
-        {tecnologias.map((item:any) => <div className='m-auto'><img className="col-8" src={`assets/${item.id}.png`} alt="" /><p className='fw-bolder'>{item.tecn_tx_nome}</p></div>)}
+        {tecnologias.map((item:any,key:any) => <div className='m-auto'><img className="col-4" src={`assets/${item.id}.png`} alt="" /><p className='fw-bolder'>{item.tecn_tx_nome}</p></div>)}
       </div>
     </div>
   );
