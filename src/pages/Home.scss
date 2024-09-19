@@ -1,3 +1,24 @@
 .card-tecnologia{
     height: 200px;
 }
+
+.table-custom {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-custom thead th:first-child {
+    border-top-left-radius: 10px;
+}
+.table-custom thead th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table-custom tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+.table-custom tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
